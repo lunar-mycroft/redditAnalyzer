@@ -1,0 +1,10 @@
+{
+    "client_id":"-VvK_0lCjvzyvQ",
+    "client_secret":"RiC7uPWgxueioGL7SK_GuVMCg_s",
+    "user_agent":{
+        "platform":"python",
+        "name":"Reddit Username Archiever",
+        "author":"lunar_mycroft",
+        "version":"0.1"
+    }
+}
