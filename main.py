@@ -2,6 +2,8 @@ import json
 
 from praw import Reddit
 
+from getText import postWords, commentWords
+
 config={}
 
 with open('config.json','r') as configFile:
@@ -18,4 +20,7 @@ reddit=Reddit(
     )
 )
 
+user=reddit.redditor("tbri")
 
+for post in user.comments.new(limit=10):
+    print(commentWords(post))
