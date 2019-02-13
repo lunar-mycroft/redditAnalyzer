@@ -2,7 +2,7 @@ import json
 
 from praw import Reddit
 
-from getText import postWords, commentWords
+from getWords import postWords, commentWords
 
 config={}
 
@@ -22,5 +22,3 @@ reddit=Reddit(
 
 user=reddit.redditor("tbri")
 
-for post in user.comments.new(limit=10):
-    print(commentWords(post))
