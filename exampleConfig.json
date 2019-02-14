@@ -6,5 +6,10 @@
         "name":"Reddit Username Archiever",
         "author":"lunar_mycroft",
         "version":"0.1"
+    },
+    "username":"lunar_mycroft",
+    "auth":{
+        "username":"lunar_mycroft",
+        "password":""
     }
 }
