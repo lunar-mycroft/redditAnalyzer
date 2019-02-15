@@ -64,8 +64,6 @@ sums=sum(map(lambda tup: tup[0],wordDict.values())),sum(map(lambda tup: tup[1],w
 inBoth={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]>0}
 onlyYou={word:nums for word,nums in wordDict.items() if nums[0]>0 and nums[1]<=0}
 neverUsed={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]<=0}
-print(len(neverUsed))
-print(len(onlyYou))
 
 inBothTable=[ ['Word','Relative frequency^1']]
 inBothTable.extend(
