@@ -9,8 +9,11 @@ A PRAW tutorial project for HackSU
 
 ## Installing 
 
-The only dependency is PRAW (Python Reddit API Wrapper).  If you have python and PIP installed, all you have to do is run the following on a admin terminal/powershell:
+The only dependency is PRAW (Python Reddit API Wrapper).  If you have _only_ python 3 and PIP installed, all you have to do is run the following on a admin terminal/powershell:
 ```pip install praw```
+
+If you have python 3 and python 2 installed, please this command instead:
+```pip3 install praw```
 
 ## Reddit app setup:
 

@@ -37,8 +37,6 @@ print("Finished loading dataset")
 numPosts=0
 numComments=0
 
-
-
 for comment in user.comments.new(limit=None):
     numComments+=1
     for word, n in commentWords(comment).items():
