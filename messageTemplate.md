@@ -14,7 +14,7 @@ Of the words that appeared both in /u/{username}'s comment and the [refrence dat
 
 These are 100 the most frequently used words by /u/{username} that were not in the [refrence dataset](http://norvig.com/ngrams/count_1w.txt):
 
-{table3}
+{table2}
 
 #Words not used by /u/{username}
 

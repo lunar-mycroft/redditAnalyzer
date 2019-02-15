@@ -20,8 +20,12 @@ reddit=Reddit(
         config['user_agent']['name'],
         config['user_agent']['version'],
         config['user_agent']['author']
-    )
+    ),
+    username=config["auth"]["username"],
+    password=config["auth"]["password"]
 )
+
+print("logged on as", reddit.user.me())
 
 user=reddit.redditor(config["username"])
 
@@ -29,8 +33,12 @@ wordDict={}
 with open('words.json','r') as wordFile:
     wordDict=json.load(wordFile)
 
+print("Finished loading dataset")
+
 numPosts=0
 numComments=0
+
+
 
 for comment in user.comments.new(limit=None):
     numComments+=1
@@ -40,6 +48,8 @@ for comment in user.comments.new(limit=None):
         else:
             wordDict[word]=[n,0]
 
+print("Finished processing comments")
+
 for post in user.submissions.new(limit=None):
     numPosts+=1
     for word, n in postWords(post).items():
@@ -48,11 +58,15 @@ for post in user.submissions.new(limit=None):
         else:
             wordDict[word]=[n,0]
 
+print("finished processing posts")
+
 sums=sum(map(lambda tup: tup[0],wordDict.values())),sum(map(lambda tup: tup[1],wordDict.values()))
 
 inBoth={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]>0}
 onlyYou={word:nums for word,nums in wordDict.items() if nums[0]>0 and nums[1]<=0}
 neverUsed={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]<=0}
+print(len(neverUsed))
+print(len(onlyYou))
 
 inBothTable=[ ['Word','Relative frequency^1']]
 inBothTable.extend(
@@ -101,4 +115,7 @@ msg=msgTemplate.format(
     table2=markdownTable(onlyYouTable),
     table3=markdownTable(neverUsedTable)
     )
-print(msg)
+
+reddit.user.me().message("Word frequency analysis for /u/{}".format(config["username"]),msg)
+
+print("Message sent to /u/{}".format(reddit.user.me()))
