@@ -1,6 +1,5 @@
 import json
 
-
 from praw import Reddit
 
 from utility.getWords import postWords, commentWords

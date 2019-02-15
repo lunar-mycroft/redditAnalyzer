@@ -3,13 +3,13 @@
     "client_secret":"YourClientSecret",
     "user_agent":{
         "platform":"python",
-        "name":"Reddit Username Archiever",
-        "author":"lunar_mycroft",
+        "name":"Reddit User Word Frequency Analyzer",
+        "author":"YourUsername",
         "version":"0.1"
     },
     "username":"lunar_mycroft",
     "auth":{
         "username":"lunar_mycroft",
-        "password":""
+        "password":"YourPassword"
     }
 }
