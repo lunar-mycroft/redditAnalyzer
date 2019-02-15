@@ -116,6 +116,6 @@ msg=msgTemplate.format(
     table3=markdownTable(neverUsedTable)
     )
 
-reddit.user.me().message("Word frequency analysis for /u/{}".format(config["username"]),msg)
+#reddit.user.me().message("Word frequency analysis for /u/{}".format(config["username"]),msg)
 
-print("Message sent to /u/{}".format(reddit.user.me()))
+#print("Message sent to /u/{}".format(reddit.user.me()))
