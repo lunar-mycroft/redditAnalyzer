@@ -2,43 +2,43 @@ import json
 
 from praw import Reddit
 
-from utility.getWords import postWords, commentWords
-from utility.sigFigs import sigFigs
+from utility.getWords import commentWords, postWords
 from utility.markdownTools import markdownTable
+from utility.sigFigs import sigFigs
 
-config={}
+config = {}
 
 with open('config.json','r') as configFile:
     config=json.load(configFile)
 
-reddit=Reddit(
-    client_id=config['client_id'],
-    client_secret=config['client_secret'],
+reddit = Reddit(
+    client_id = config['client_id'],
+    client_secret = config['client_secret'],
     user_agent="{}:{}:{} (by {})".format(
         config['user_agent']['platform'],
         config['user_agent']['name'],
         config['user_agent']['version'],
         config['user_agent']['author']
     ),
-    username=config["auth"]["username"],
-    password=config["auth"]["password"]
+    username = config["auth"]["username"],
+    password = config["auth"]["password"]
 )
 
 print("logged on as", reddit.user.me())
 
-user=reddit.redditor(config["username"])
+user = reddit.redditor(config["username"])
 
-wordDict={}
+wordDict = {}
 with open('words.json','r') as wordFile:
-    wordDict=json.load(wordFile)
+    wordDict = json.load(wordFile)
 
 print("Finished loading dataset")
 
-numPosts=0
-numComments=0
+numPosts = 0
+numComments = 0
 
 for comment in user.comments.new(limit=None):
-    numComments+=1
+    numComments += 1
     for word, n in commentWords(comment).items():
         if word in wordDict:
             wordDict[word][0]+=n
@@ -48,7 +48,7 @@ for comment in user.comments.new(limit=None):
 print("Finished processing comments")
 
 for post in user.submissions.new(limit=None):
-    numPosts+=1
+    numPosts += 1
     for word, n in postWords(post).items():
         if word in wordDict:
             wordDict[word][0]+=n
@@ -59,16 +59,16 @@ print("finished processing posts")
 
 sums=sum(map(lambda tup: tup[0],wordDict.values())),sum(map(lambda tup: tup[1],wordDict.values()))
 
-inBoth={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]>0}
-onlyYou={word:nums for word,nums in wordDict.items() if nums[0]>0 and nums[1]<=0}
-neverUsed={word:nums for word,nums in wordDict.items() if nums[1]>0 and nums[0]<=0}
+inBoth={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] > 0}
+onlyYou={word: nums for word, nums in wordDict.items() if nums[0] > 0 and nums[1] <= 0}
+neverUsed={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] <= 0}
 
 inBothTable=[ ['Word','Relative frequency^1']]
 inBothTable.extend(
     [[word, "{:,}".format(sigFigs((nums[0]/nums[1])*(sums[1]/sums[0]),4))]
         for word, nums in sorted(
             sorted(inBoth.items(),key=lambda t:t[1][1],reverse=True), 
-            key=lambda t: t[1][0]/t[1][1],
+            key=lambda t: t[1][0] / t[1][1],
             reverse=True
         )[:100]]
     )
@@ -99,16 +99,16 @@ with open("messageTemplate.md",'r') as msgTemplateFile:
 
 
 msg=msgTemplate.format(
-    username=config["username"],
-    numWords=sums[0],
-    numPosts=numPosts,
-    numComments=numComments,
-    numUnique=len(onlyYou)+len(inBoth),
-    numNotInDS=len(onlyYou),
-    numNotUsed=len(neverUsed),
-    table1=markdownTable(inBothTable),
-    table2=markdownTable(onlyYouTable),
-    table3=markdownTable(neverUsedTable)
+    username = config["username"],
+    numWords = sums[0],
+    numPosts = numPosts,
+    numComments = numComments,
+    numUnique = len(onlyYou)+len(inBoth),
+    numNotInDS = len(onlyYou),
+    numNotUsed = len(neverUsed),
+    table1 = markdownTable(inBothTable),
+    table2 = markdownTable(onlyYouTable),
+    table3 = markdownTable(neverUsedTable)
     )
 
 reddit.user.me().message("Word frequency analysis for /u/{}".format(config["username"]),msg)
