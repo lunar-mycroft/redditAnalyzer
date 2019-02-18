@@ -7,7 +7,6 @@ from utility.markdownTools import markdownTable
 from utility.sigFigs import sigFigs
 
 config = {}
-
 with open('config.json', 'r') as configFile:
     config=json.load(configFile)
 print("Finished loading config")
