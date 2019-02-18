@@ -51,3 +51,11 @@ for post in user.submissions.new(limit=None):
         else:
             wordDict[word]=[n,0]
 print("finished loading posts")
+
+sums=sum(map(lambda tup: tup[0], wordDict.values())), sum(map(lambda tup: tup[1], wordDict.values()))
+
+inBoth={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] > 0}
+onlyYou={word: nums for word, nums in wordDict.items() if nums[0] > 0 and nums[1] <= 0}
+neverUsed={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] <= 0}
+
+print("Finished filtering words by use")
