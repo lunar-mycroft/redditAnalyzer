@@ -59,3 +59,9 @@ onlyYou={word: nums for word, nums in wordDict.items() if nums[0] > 0 and nums[1
 neverUsed={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] <= 0}
 
 print("Finished filtering words by use")
+
+for word, nums in inBoth:
+    print("{}: {} , {} ".format(word, nums[0],nums[1]))
+print("\n\n=====\n\n")
+for word, nums in onlyYou:
+    print("{}: {} , {} ".format(word, nums[0],nums[1]))
