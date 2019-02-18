@@ -3,6 +3,8 @@ import json
 from praw import Reddit
 
 from utility.getWords import postWords, commentWords
+from utility.markdownTools import markdownTable
+from utility.sigFigs import sigFigs
 
 config = {}
 with open('config.json', 'r') as configFile:
@@ -59,3 +61,50 @@ onlyYou={word: nums for word, nums in wordDict.items() if nums[0] > 0 and nums[1
 neverUsed={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] <= 0}
 
 print("Finished filtering words by use")
+
+inBothTable=[ ['Word','Relative frequency^1']]
+inBothTable.extend(
+    [[word, "{:,}".format(sigFigs((nums[0]/nums[1])*(sums[1]/sums[0]),4))]
+        for word, nums in sorted(
+            sorted(inBoth.items(),key=lambda t:t[1][1],reverse=True), 
+            key=lambda t: t[1][0] / t[1][1],
+            reverse=True
+        )[:100]]
+    )
+onlyYouTable=[["Word", "Frequency"]]
+onlyYouTable.extend(
+    [[word, "{:,}".format(sigFigs(nums[0]/sums[0],4))]
+        for word, nums in sorted(
+            onlyYou.items(),
+            key=lambda t: t[1][0],
+            reverse=True
+        )[:100]]
+    )
+neverUsedTable=[["Word", "Frequency"]]
+neverUsedTable.extend(
+    [ [word, "{:,}".format(sigFigs(nums[1]/sums[1],4))]
+        for word,nums in sorted(
+            neverUsed.items(),
+            key=lambda t:t[1][1],
+            reverse=True 
+        )[:100]]
+    )
+
+msgTemplate=""
+with open("messageTemplate.md",'r') as msgTemplateFile:
+    msgTemplate=msgTemplateFile.read()
+
+msg=msgTemplate.format(
+    username = config["username"],
+    numWords = sums[0],
+    numPosts = numPosts,
+    numComments = numComments,
+    numUnique = len(onlyYou)+len(inBoth),
+    numNotInDS = len(onlyYou),
+    numNotUsed = len(neverUsed),
+    table1 = markdownTable(inBothTable),
+    table2 = markdownTable(onlyYouTable),
+    table3 = markdownTable(neverUsedTable)
+    )
+
+print("Finished generating markdown")
