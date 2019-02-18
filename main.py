@@ -51,3 +51,5 @@ for post in user.submissions.new(limit=None):
         else:
             wordDict[word]=[n,0]
 print("finished loading posts")
+
+print("Number of posts: {}\nNumber of comments: {}".format(numPosts, numComments))
