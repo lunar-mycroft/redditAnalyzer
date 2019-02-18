@@ -7,6 +7,8 @@ from utility.getWords import postWords, commentWords
 config = {}
 with open('config.json', 'r') as configFile:
     config=json.load(configFile)
+print("Finished loading config")
+
 wordDict = {}
 with open('words.json', 'r') as wordFile:
     wordDict = json.load(wordFile)
