@@ -43,7 +43,7 @@ for comment in user.comments.new(limit=None):
             wordDict[word][0]+=n
         else:
             wordDict[word]=[n,0]
-print("Finished processing comments")
+print("Finished loading comments")
 
 for post in user.submissions.new(limit=None):
     numPosts += 1
@@ -52,7 +52,7 @@ for post in user.submissions.new(limit=None):
             wordDict[word][0]+=n
         else:
             wordDict[word]=[n,0]
-print("finished processing posts")
+print("finished loading posts")
 
 sums=sum(map(lambda tup: tup[0], wordDict.values())), sum(map(lambda tup: tup[1], wordDict.values()))
 
