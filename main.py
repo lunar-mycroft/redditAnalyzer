@@ -5,6 +5,12 @@ from praw import Reddit
 config = {}
 with open('config.json', 'r') as configFile:
     config=json.load(configFile)
+print("Finished loading config")
+
+wordDict = {}
+with open('words.json', 'r') as wordFile:
+    wordDict = json.load(wordFile)
+print("Finished loading dataset")
 
 reddit = Reddit(
     client_id = config['client_id'],
