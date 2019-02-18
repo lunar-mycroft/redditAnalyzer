@@ -107,4 +107,6 @@ msg=msgTemplate.format(
     table3 = markdownTable(neverUsedTable)
     )
 
-print("Finished generating markdown")
+print(msg)
+
+#Milestone 5 finishes the project, so see the completed branch for that.
