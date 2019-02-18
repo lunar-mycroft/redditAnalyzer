@@ -2,9 +2,9 @@
 
 A PRAW tutorial project for HackSU
 
-#Settup
+# Settup
 
-##Requirements
+## Requirements
 
 - [Python 3](https://www.python.org/downloads/)
 - A reddit account.  Accounts are free to create and don't require email or other details.  
