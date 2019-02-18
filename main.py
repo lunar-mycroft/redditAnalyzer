@@ -43,7 +43,6 @@ for comment in user.comments.new(limit=None):
             wordDict[word][0]+=n
         else:
             wordDict[word]=[n,0]
-
 print("Finished processing comments")
 
 for post in user.submissions.new(limit=None):
@@ -53,10 +52,9 @@ for post in user.submissions.new(limit=None):
             wordDict[word][0]+=n
         else:
             wordDict[word]=[n,0]
-
 print("finished processing posts")
 
-sums=sum(map(lambda tup: tup[0],wordDict.values())),sum(map(lambda tup: tup[1],wordDict.values()))
+sums=sum(map(lambda tup: tup[0], wordDict.values())), sum(map(lambda tup: tup[1], wordDict.values()))
 
 inBoth={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums[0] > 0}
 onlyYou={word: nums for word, nums in wordDict.items() if nums[0] > 0 and nums[1] <= 0}
@@ -91,11 +89,8 @@ neverUsedTable.extend(
     )
 
 msgTemplate=""
-
 with open("messageTemplate.md",'r') as msgTemplateFile:
     msgTemplate=msgTemplateFile.read()
-
-
 
 msg=msgTemplate.format(
     username = config["username"],
