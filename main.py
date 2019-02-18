@@ -8,8 +8,14 @@ from utility.sigFigs import sigFigs
 
 config = {}
 
-with open('config.json','r') as configFile:
+with open('config.json', 'r') as configFile:
     config=json.load(configFile)
+print("Finished loading config")
+
+wordDict = {}
+with open('words.json', 'r') as wordFile:
+    wordDict = json.load(wordFile)
+print("Finished loading dataset")
 
 reddit = Reddit(
     client_id = config['client_id'],
@@ -27,12 +33,6 @@ reddit = Reddit(
 print("logged on as", reddit.user.me())
 
 user = reddit.redditor(config["username"])
-
-wordDict = {}
-with open('words.json','r') as wordFile:
-    wordDict = json.load(wordFile)
-
-print("Finished loading dataset")
 
 numPosts = 0
 numComments = 0
