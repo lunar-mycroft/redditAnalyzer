@@ -93,7 +93,7 @@ with open("messageTemplate.md",'r') as msgTemplateFile:
     msgTemplate=msgTemplateFile.read()
 
 msg=msgTemplate.format(
-    username = config["username"],
+    username = user,
     numWords = sums[0],
     numPosts = numPosts,
     numComments = numComments,
@@ -103,7 +103,7 @@ msg=msgTemplate.format(
     table1 = markdownTable(inBothTable),
     table2 = markdownTable(onlyYouTable),
     table3 = markdownTable(neverUsedTable)
-    )
+)
 
 print("Finished generating markdown")
 
