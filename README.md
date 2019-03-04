@@ -1,6 +1,9 @@
-# redditAnalyzer
+# Reddit Analyzer
 
 A PRAW tutorial project for HackSU
+
+## Goal
+By the end of this project, you will have a simple script that analyzes all of your most recent posts and comments an compares the word frequency of your reddit activity to that of general english text (according to [a dataset of the 1/3 million most frequently used english words](http://norvig.com/ngrams/count_1w.txt) by [Peter Norvig](http://norvig.com/ngrams/)
 
 # Settup
 
@@ -9,7 +12,7 @@ A PRAW tutorial project for HackSU
 - [Python 3](https://www.python.org/downloads/)
 - A reddit account.  Accounts are free to create and don't require email or other details.  
 
-## Installing 
+## Installing libraries
 
 The only dependency is PRAW (Python Reddit API Wrapper).  If you have _only_ python 3 and PIP installed, all you have to do is run the following on a admin terminal/powershell:
 ```pip install praw```
