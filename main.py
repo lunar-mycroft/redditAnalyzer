@@ -38,18 +38,18 @@ for comment in user.comments.new(limit=None):
     numComments += 1
     for word, n in commentWords(comment).items():
         if word in wordDict:
-            wordDict[word][0]+=n
+            wordDict[word][0] += n
         else:
-            wordDict[word]=[n,0]
+            wordDict[word] = [n,0]
 print("Finished loading comments")
 
 for post in user.submissions.new(limit=None):
     numPosts += 1
     for word, n in postWords(post).items():
         if word in wordDict:
-            wordDict[word][0]+=n
+            wordDict[word][0] += n
         else:
-            wordDict[word]=[n,0]
+            wordDict[word] = [n,0]
 print("finished loading posts")
 
 print("Number of posts: {}\nNumber of comments: {}".format(numPosts, numComments))
