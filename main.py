@@ -38,18 +38,18 @@ for comment in user.comments.new(limit=None):
     numComments += 1
     for word, n in commentWords(comment).items():
         if word in wordDict:
-            wordDict[word][0]+=n
+            wordDict[word][0] += n
         else:
-            wordDict[word]=[n,0]
+            wordDict[word] = [n,0]
 print("Finished loading comments")
 
 for post in user.submissions.new(limit=None):
     numPosts += 1
     for word, n in postWords(post).items():
         if word in wordDict:
-            wordDict[word][0]+=n
+            wordDict[word][0] += n
         else:
-            wordDict[word]=[n,0]
+            wordDict[word] = [n,0]
 print("finished loading posts")
 
 sums=sum(map(lambda tup: tup[0], wordDict.values())), sum(map(lambda tup: tup[1], wordDict.values()))
@@ -61,7 +61,7 @@ neverUsed={word: nums for word, nums in wordDict.items() if nums[1] > 0 and nums
 print("Finished filtering words by use")
 
 for word, nums in inBoth:
-    print("{}: {} , {} ".format(word, nums[0],nums[1]))
+    print("{}: {} , {} ".format(word, nums[0], nums[1]))
 print("\n\n=====\n\n")
 for word, nums in onlyYou:
-    print("{}: {} , {} ".format(word, nums[0],nums[1]))
+    print("{}: {} , {} ".format(word, nums[0], nums[1]))
