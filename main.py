@@ -17,7 +17,7 @@ print("Finished loading dataset")
 reddit = Reddit(
     client_id = config['client_id'],
     client_secret = config['client_secret'],
-    user_agent="{}:{}:{} (by {})".format(
+    user_agent = "{}:{}:{} (by {})".format(
         config['user_agent']['platform'],
         config['user_agent']['name'],
         config['user_agent']['version'],
